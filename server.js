@@ -40,7 +40,7 @@ server.get("/api/guest", (req, res) => {
 });
 
 server.get("/api/guest/:name", (req, res) => {
-    var firstname = req.params.firstname;
+    var name = req.params.name;
     var sql = "SELECT id, name, invitationid FROM tbl_guest_test WHERE name LIKE '" + name + "%'";
     db.query(sql, function(error, result) {
         if (error) {
