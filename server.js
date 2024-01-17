@@ -29,7 +29,7 @@ server.listen(8085, function check (error) {
 });
 
 server.get("/api/guest", (req, res) => {
-    var sql = "SELECT firstname, lastname, confirmed, confirmationdate FROM tbl_guest_test";
+    var sql = "SELECT name, confirmed, confirmationdate FROM tbl_guest_test";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
@@ -41,7 +41,7 @@ server.get("/api/guest", (req, res) => {
 
 server.get("/api/guest/:firstname", (req, res) => {
     var firstname = req.params.firstname;
-    var sql = "SELECT id, firstname, lastname, invitationid FROM tbl_guest_test WHERE firstname LIKE '" + firstname + "%'";
+    var sql = "SELECT id, name, invitationid FROM tbl_guest_test WHERE firstname LIKE '" + firstname + "%'";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
@@ -53,7 +53,7 @@ server.get("/api/guest/:firstname", (req, res) => {
 
 server.get("/api/guest/invite/:inviteid", (req, res) => {
     var inviteid = req.params.inviteid;
-    var sql = "SELECT id, firstname, lastname, confirmed FROM tbl_guest_test WHERE invitationid = '" + inviteid + "'";
+    var sql = "SELECT id, name, confirmed FROM tbl_guest_test WHERE invitationid = '" + inviteid + "'";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
