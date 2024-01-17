@@ -39,9 +39,9 @@ server.get("/api/guest", (req, res) => {
     });
 });
 
-server.get("/api/guest/:firstname", (req, res) => {
+server.get("/api/guest/:name", (req, res) => {
     var firstname = req.params.firstname;
-    var sql = "SELECT id, name, invitationid FROM tbl_guest_test WHERE firstname LIKE '" + firstname + "%'";
+    var sql = "SELECT id, name, invitationid FROM tbl_guest_test WHERE name LIKE '" + name + "%'";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
