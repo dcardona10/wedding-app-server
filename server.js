@@ -29,7 +29,7 @@ server.listen(8085, function check (error) {
 });
 
 server.get("/api/guest", (req, res) => {
-    var sql = "SELECT name, confirmed, confirmationdate FROM tbl_guest_test";
+    var sql = "SELECT name, confirmed, confirmationdate FROM tbl_guest";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
@@ -41,7 +41,7 @@ server.get("/api/guest", (req, res) => {
 
 server.get("/api/guest/:name", (req, res) => {
     var name = req.params.name;
-    var sql = "SELECT id, name, invitationid FROM tbl_guest_test WHERE name LIKE '" + name + "%'";
+    var sql = "SELECT id, name, invitationid FROM tbl_guest WHERE name LIKE '%" + name + "%'";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
@@ -53,7 +53,7 @@ server.get("/api/guest/:name", (req, res) => {
 
 server.get("/api/guest/invite/:inviteid", (req, res) => {
     var inviteid = req.params.inviteid;
-    var sql = "SELECT id, name, confirmed FROM tbl_guest_test WHERE invitationid = '" + inviteid + "'";
+    var sql = "SELECT id, name, confirmed FROM tbl_guest WHERE invitationid = '" + inviteid + "'";
     db.query(sql, function(error, result) {
         if (error) {
             console.log("Error connecting to Database");
@@ -64,7 +64,7 @@ server.get("/api/guest/invite/:inviteid", (req, res) => {
 });
 
 server.put("/api/guest/confirm/:id", (req, res) => {
-    let sql = "UPDATE tbl_guest_test SET confirmed = " + req.body.confirmed + ", confirmationdate = NOW() WHERE id = " + req.params.id;
+    let sql = "UPDATE tbl_guest SET confirmed = " + req.body.confirmed + ", confirmationdate = NOW() WHERE id = " + req.params.id;
     let a = db.query(sql, (error, result) => {
         if (error) {
             res.send({status : "Error", message : "Confirmation Failed"});
